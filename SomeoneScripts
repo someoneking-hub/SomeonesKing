@@ -14,13 +14,302 @@ local Window = Fluent:CreateWindow({
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    Infor = Window:AddTab({Title = "Informações", Icon = "rbxassetid://127950462202673"}),
+		Farm = Window:AddTab({ Title = "Principal", Icon = "rbxassetid://127950462202673" }),
+		   Quest = Window:AddTab({Title = "Quest & Item", Icon = "rbxassetid://127950462202673"}),
+		   
+	 SeaEvent = Window:AddTab({Title = "Eventos Marítimos", Icon = "rbxassetid://127950462202673"}),
+	Island = Window:AddTab({Title = "Ilhas", Icon = "rbxassetid://127950462202673"});
+	Fruit = Window:AddTab({Title = "Frutas & Raid", Icon = "rbxassetid://127950462202673"}),
+		 Teleport = Window:AddTab({Title = "Teleporte", Icon = "rbxassetid://127950462202673"}),
+	Stats = Window:AddTab({Title = "Stats", Icon = "rbxassetid://127950462202673"}),	
+Race = Window:AddTab({Title = "Raça", Icon = "rbxassetid://127950462202673"}),
+Visual = Window:AddTab({Title = "Visual", Icon = "rbxassetid://127950462202673"}),	
+Settings = Window:AddTab({ Title = "Settings", Icon = "rbxassetid://127950462202673" }),
 }
 
 local Options = Fluent.Options
 
 do
+--///////INFORMAÇÕES////////
+local prginfor = Tabs.Infor:AddParagraph({
+Title = "O Que Foi Adicionado na Versão 1.0?",
+Content = "Na Aba [Informações] \n Visualização do Status Das Seguintes Ilhas: \n Ilha da Kitsune, \n Ilha da Miragem, \n Ilha Pré-histórica, \n e Dimensão Congelada.Subonar Spy e a Conversa Dele também foi adicionado."
+})
+--prginfor:SetDesc = ({"Na Aba [Informações] \n Visualização do Status Das Seguintes Ilhas: \n Ilha da Kitsune, \n Ilha da Miragem, \n Ilha Pré-histórica, \n e Dimensão Congelada.Subonar Spy e a Conversa Dele também foi adicionado."})
+local prgfix = Tabs.Infor:AddParagraph({
+Title = "Corrigido!",
+Content = "Nada Ainda, Não Tivemos Nenhum Erro Ainda"
+})
+
+
+if World3  then
+   local mastery = Tabs.Infor:AddSection("Spawnado")
+    local prgSPY = Tabs.Infor:AddParagraph({
+        Title = "Status do Spy",
+        Content = ""
+    })
+    spawn(function()
+        pcall(function()
+            while wait() do
+                local payment = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("InfoLeviathan", "1")
+                if (payment == 1) then
+                    prgSPY:SetDesc("Não ouvi nada, companheiro. Está quieto como um navio fantasma lá fora. [FALTA 4]")
+                elseif (payment == 2) then
+                    prgSPY:SetDesc("Alguns cidadãos afirmam ter ouvido algo estranho, mas duvido. [FALTA 3]")
+                elseif (payment == 3) then
+                    prgSPY:SetDesc("Ouvi dizer que está um pouco frio lá fora. Isso é um pouco estranho. [FALTA 2]")
+                    elseif (payment == 4) then
+                    prgSPY:SetDesc("Está simplesmente congelante lá fora! O que há com todas essas nuvens ameaçadoras? Algo está acontecendo... [FALTA 1]")
+                    elseif (payment == 5) then
+                    prgSPY:SetDesc("O Leviatã está lá fora! Vá encontrá-lo antes que ele cause mais destruição.")
+                    elseif
+ (payment == 0) then
+                    prgSPY:SetDesc("Ainda não sei de nada. [Está em Cooldown]")
+                  
+             
+                end
+            end
+        end)
+    end)
+end
+if World3 then
+Tabs.Infor:AddButton({
+    Title = "Subornar Spy. [APENAS 4 VEZES]",
+    Description = "",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("InfoLeviathan", "2");
+    end
+});
+local prgDC = Tabs.Infor:AddParagraph({
+    Title = "Status da Dimensão Congelada",
+    Content = ""
+})
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
+                prgDC:SetDesc("Spawnada: ✅️")
+            else
+                prgDC:SetDesc("Spawnada: ❌️")
+            end
+        end
+    end)
+end)
+local prgPH= Tabs.Infor:AddParagraph({
+    Title = "Status da Ilha Pré-histórica [Ilha Vulcanica]",
+    Content = ""
+})
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
+                prgPH:SetDesc("Spawnada: ✅️")
+            else
+                prgPH:SetDesc("Spawnada: ❌️")
+            end
+        end
+    end)
+end)
+    local prgKT= Tabs.Infor:AddParagraph({
+    Title = "Status da Ilha da Kitsune",
+    Content = ""
+})
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+                prgKT:SetDesc("Spawnada: ✅️")
+            else
+                prgKT:SetDesc("Spawnada: ❌️")
+            end
+        end
+    end)
+end)
+    local prgMG = Tabs.Infor:AddParagraph({
+    Title = "Status da Ilha da Miragem",
+    Content = ""
+    })
+task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                if game.Workspace.Map:FindFirstChild("MysticIsland") then
+                    prgMG:SetDesc("Spawnada : ✅️")
+                else
+                    prgMG:SetDesc("Spawnada : ❌")
+                end
+            end)
+        end
+    end)
+end
+    
+    local FM = Tabs.Infor:AddSection("Fase da Lua")
+    local FM = Tabs.Infor:AddParagraph({
+        Title = "Lua",
+        Content = ""
+    })
+    task.spawn(function()
+    while task.wait() do
+        pcall(function()
+            if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
+                FM:SetDesc("Lua : 🌕")
+            elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
+                FM:SetDesc("Lua : 🌖")
+            elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
+                FM:SetDesc("Lua : 🌗")
+            elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
+                FM:SetDesc("Lua : 🌘")
+            elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
+                FM:SetDesc("Lua : 🌑")
+            else
+                FM:SetDesc("Esperando Pela Lua")
+            end
+        end)
+    end
+end)
+   
+    if World3 then
+    local mastery = Tabs.Infor:AddSection("Status Raid Boss")
+local MobKilled = Tabs.Infor:AddParagraph({
+        Title = "Cake Prince Boss Status",
+        Content = ""
+    })
+    
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                    MobKilled:SetDesc("Defeat : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
+                elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                    MobKilled:SetDesc("Defeat : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
+                elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                    MobKilled:SetDesc("Defeat : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
+                else
+                    MobKilled:SetDesc("Boss Is Spawning")
+                end
+            end)
+        end
+    end)
+    else
+    local sectionPlayer =Tabs.Infor:AddSection("Informações do Jogador")
+local prgSTS = Tabs.Infor:AddParagraph({
+Title = "Stats do Jogador",
+Content = ""
+})
+
+
+
+spawn(function()
+        while wait() do
+            pcall(function()
+                prgSTS:SetDesc("Pontos de Status Sobrando : "..game:GetService("Players").LocalPlayer.Data.Points.Value)
+            end)
+        end
+    end)
+
+    local prgrc = Tabs.Infor:AddParagraph({
+Title = "Raça do Jogador","?",
+Content = ""
+})
+
+
+
+spawn(function()
+        while wait() do
+            pcall(function()
+                prgrc:SetDesc("Raça do Jogador : "..game:GetService("Players").LocalPlayer.Data.Race.Value)
+            end)
+        end
+    end)
+      local prgmny = Tabs.Infor:AddParagraph({
+Title = "Dinheiro",
+Content = ""
+})
+    spawn(function()
+        while wait() do
+            pcall(function()
+                prgmny:SetDesc("Fragmentos : "..game:GetService("Players").LocalPlayer.Data.Beli.Value)
+            end)
+        end
+    end)
+  local prgfrag = Tabs.Infor:AddParagraph({
+Title = "Fragmentos",
+Content = ""
+})
+    spawn(function()
+        while wait() do
+            pcall(function()
+                prgfrag:SetDesc("Fragmentos : "..game:GetService("Players").LocalPlayer.Data.Fragments.Value)
+            end)
+        end
+    end)
+    
+      local prgHB = Tabs.Infor:AddParagraph({
+Title = "Bounty/Honra",
+Content = ""
+})
+    spawn(function()
+        while wait() do
+            pcall(function()
+                prgHB:SetDesc("Bounty : "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value)
+            end)
+        end
+    end)
+
+if World3 == true then
+local prgbn = Tabs.Infor:AddParagraph({
+Title = "Ossos Acumulados",
+Content = ""
+})
+spawn(function()
+    while wait() do
+        pcall(function()
+           prgbn:SetDesc("Total Bone : "..(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Check")))
+        end)
+    end
+end)
+end
+if World2 == true then
+    local sectionVEL = Tabs.Infor:AddSection("Vendedor de Espada Lendária")
+
+local prgVEL = Tabs.Infor:AddParagraph({
+Title = "Vendedor de Espada Lendária",
+Content = ""
+})
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "1") then
+                prgVEL:SetDesc("Espada Lendária a Venda: Shizu [Shisui]")
+            elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer","2") then
+                prgVEL:SetDesc("Espada Lendária a Venda : Oroshi [Wando]")
+            elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer","3") then
+                prgVel:SetDesc("Espada Lendária a Venda : Saishi [Saddi]")
+            else
+                prgVEL:SetDesc("Não Tem Espada a Venda")
+            end
+        end
+    end)
+end)
+end    
+    
+    local mastery = Tabs.Infor:AddSection("Fruta Spawnada")
+    local prgfruit = Tabs.Infor:AddParagraph({
+    Title = "Fruta Spawnada",
+    Content = ""
+    })
+    spawn(function()
+        while wait(1) do
+            pcall(function()
+                if (game:GetService("Players").LocalPlayer.Data.DevilFruit.Value) then
+                prgfruit:SetDesc("Fruta Spawnada : "..game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)
+                else
+                    prgfruit:SetDesc("Fruta Spawnada : ❌")
+                end
+            end)
+        end
+    end)
     
 
 
